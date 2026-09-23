@@ -21,7 +21,7 @@ class CartProvider extends ChangeNotifier{
     _items.forEach((key, item){
       total += item.totalPrice;
     });
-    return subtotal;
+    return total;
   }
 
   /// 10% discount if sub total > 2000

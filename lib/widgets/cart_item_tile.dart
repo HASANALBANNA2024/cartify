@@ -27,14 +27,22 @@ class CartItemTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: const Color(0xFFEEF2EC),
-              borderRadius: BorderRadius.circular(8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              cartItem.product.imagePath,
+              width: 48,
+              height: 48,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  width: 48,
+                  height: 48,
+                  color: const Color(0xFFEEF2EC),
+                  child: const Icon(Icons.shopping_bag, color: Color(0xFF3D544D)),
+                );
+              },
             ),
-            child: const Icon(Icons.shopping_bag, color: Color(0xFF3D544D)),
           ),
           const SizedBox(width: 12),
           Expanded(

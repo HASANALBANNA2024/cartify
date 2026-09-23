@@ -26,7 +26,7 @@ class AppButton extends StatelessWidget {
         style: OutlinedButton.styleFrom(
           side: const BorderSide(color: Color(0xFFB8422F)),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         ),
         child: Text(
           text,
@@ -41,14 +41,25 @@ class AppButton extends StatelessWidget {
         backgroundColor: backgroundColor ?? const Color(0xFF132420),
         foregroundColor: textColor ?? Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
         elevation: 0,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (icon != null) ...[Icon(icon, size: 18), const SizedBox(width: 6)],
-          Text(text, style: const TextStyle(fontWeight: FontWeight.w600)),
+          if (icon != null) ...[
+            Icon(icon, size: 16),
+            const SizedBox(width: 4),
+          ],
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                text,
+                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'app_button.dart';
 class AppCard extends StatelessWidget {
   final String title;
   final double price;
+  final String imagePath;
   final VoidCallback onAddToCart;
   final bool isAdded;
 
@@ -11,6 +12,7 @@ class AppCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.price,
+    required this.imagePath,
     required this.onAddToCart,
     this.isAdded = false,
   });
@@ -33,7 +35,22 @@ class AppCard extends StatelessWidget {
                 color: Color(0xFFEEF2EC),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
               ),
-              child: const Icon(Icons.shopping_bag_outlined, size: 40, color: Color(0xFF3D544D)),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Center(
+                      child: Icon(
+                        Icons.shopping_bag_outlined,
+                        size: 40,
+                        color: Color(0xFF3D544D),
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
           ),
           Padding(
