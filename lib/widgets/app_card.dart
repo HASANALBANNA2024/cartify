@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'app_button.dart';
 
 class AppCard extends StatelessWidget {
@@ -23,7 +24,7 @@ class AppCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.black.withOpacity(0.08)),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.08)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +37,9 @@ class AppCard extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
               ),
               child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16),
+                ),
                 child: Image.asset(
                   imagePath,
                   fit: BoxFit.cover,
@@ -62,7 +65,10 @@ class AppCard extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -80,7 +86,9 @@ class AppCard extends StatelessWidget {
                   child: AppButton(
                     text: isAdded ? 'Added' : 'Add to cart',
                     icon: isAdded ? Icons.check : Icons.add,
-                    backgroundColor: isAdded ? const Color(0xFF3E7A4C) : const Color(0xFF132420),
+                    backgroundColor: isAdded
+                        ? const Color(0xFF3E7A4C)
+                        : const Color(0xFF132420),
                     onPressed: onAddToCart,
                   ),
                 ),

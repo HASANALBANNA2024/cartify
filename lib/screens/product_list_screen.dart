@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/product_provider.dart';
+
 import '../providers/cart_provider.dart';
+import '../providers/product_provider.dart';
 import '../widgets/app_card.dart';
 import '../widgets/app_text_field.dart';
 import 'cart_screen.dart';
@@ -14,7 +15,10 @@ class ProductListScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEEF2EC),
       appBar: AppBar(
-        title: const Text('Loom', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+        title: const Text(
+          'Cartify',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -24,9 +28,16 @@ class ProductListScreen extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.shopping_bag_outlined, color: Colors.black, size: 28),
+                  icon: const Icon(
+                    Icons.shopping_bag_outlined,
+                    color: Colors.black,
+                    size: 28,
+                  ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const CartScreen()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const CartScreen()),
+                    );
                   },
                 ),
                 Consumer<CartProvider>(
@@ -43,7 +54,11 @@ class ProductListScreen extends StatelessWidget {
                         ),
                         child: Text(
                           '${cart.totalItemCount}',
-                          style: const TextStyle(fontSize: 10, color: Colors.white, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     );
@@ -51,7 +66,7 @@ class ProductListScreen extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -61,7 +76,8 @@ class ProductListScreen extends StatelessWidget {
           children: [
             AppTextField(
               hintText: 'Search products',
-              onChanged: (value) => context.read<ProductProvider>().setSearchQuery(value),
+              onChanged: (value) =>
+                  context.read<ProductProvider>().setSearchQuery(value),
             ),
             const SizedBox(height: 12),
             // Category Filter Chips
@@ -91,8 +107,14 @@ class ProductListScreen extends StatelessWidget {
               },
             ),
             const SizedBox(height: 12),
-            const Text('FEATURED PRODUCTS',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey)),
+            const Text(
+              'FEATURED PRODUCTS',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
+            ),
             const SizedBox(height: 8),
             // Grid View of Products
             Expanded(
@@ -101,12 +123,13 @@ class ProductListScreen extends StatelessWidget {
                   final products = productProv.filteredProducts;
                   return GridView.builder(
                     itemCount: products.length,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.63,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.63,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                        ),
                     itemBuilder: (context, index) {
                       final product = products[index];
                       final isInCart = cartProv.isInCart(product.id);

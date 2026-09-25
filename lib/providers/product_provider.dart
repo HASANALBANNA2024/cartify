@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../models/product_model.dart';
 
-class ProductProvider extends ChangeNotifier{
+class ProductProvider extends ChangeNotifier {
   final List<ProductModel> _products = [
     ProductModel(
       id: '1',
@@ -89,27 +90,38 @@ class ProductProvider extends ChangeNotifier{
     ),
   ];
 
+  /// variable for search and selectedCategory
   String _searchQuery = '';
   String _selectedCategory = 'All';
 
-  String get selectedCategory =>_selectedCategory;
+  String get selectedCategory => _selectedCategory;
 
-  List<String> get categories => ['All', 'Audio', 'Apparel','Home','Bags'];
+  /// categories get
+  List<String> get categories {
+    final allCategories = _products.map((p) => p.category).toSet().toList();
+    return ['All', ...allCategories];
+  }
 
+  /// filter product for filter chips
   List<ProductModel> get filteredProducts {
-    return _products.where((product){
-      final matchesCategory = _selectedCategory == 'All' || product.category == _selectedCategory;
-      final matchesSearch = product.name.toLowerCase().contains(_searchQuery.toLowerCase());
+    return _products.where((product) {
+      final matchesCategory =
+          _selectedCategory == 'All' || product.category == _selectedCategory;
+      final matchesSearch = product.name.toLowerCase().contains(
+        _searchQuery.toLowerCase(),
+      );
       return matchesCategory && matchesSearch;
     }).toList();
   }
 
-  void setSearchQuery(String query){
+  /// Search Query Listeners
+  void setSearchQuery(String query) {
     _searchQuery = query;
     notifyListeners();
   }
 
-  void setCategory(String category){
+  ///  set Category Listeners
+  void setCategory(String category) {
     _selectedCategory = category;
     notifyListeners();
   }

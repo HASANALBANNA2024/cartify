@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/product_model.dart';
 
 class CartItemTile extends StatelessWidget {
@@ -23,7 +24,7 @@ class CartItemTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.black.withOpacity(0.08)),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.08)),
       ),
       child: Row(
         children: [
@@ -39,7 +40,10 @@ class CartItemTile extends StatelessWidget {
                   width: 48,
                   height: 48,
                   color: const Color(0xFFEEF2EC),
-                  child: const Icon(Icons.shopping_bag, color: Color(0xFF3D544D)),
+                  child: const Icon(
+                    Icons.shopping_bag,
+                    color: Color(0xFF3D544D),
+                  ),
                 );
               },
             ),
@@ -49,9 +53,14 @@ class CartItemTile extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(cartItem.product.name, style: const TextStyle(fontWeight: FontWeight.w600)),
-                Text('৳${cartItem.product.price.toStringAsFixed(0)} each',
-                    style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                Text(
+                  cartItem.product.name,
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  '৳${cartItem.product.price.toStringAsFixed(0)} each',
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
+                ),
               ],
             ),
           ),
@@ -68,7 +77,10 @@ class CartItemTile extends StatelessWidget {
                   constraints: const BoxConstraints(),
                   padding: const EdgeInsets.all(6),
                 ),
-                Text('${cartItem.quantity}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(
+                  '${cartItem.quantity}',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
                 IconButton(
                   icon: const Icon(Icons.add, size: 16),
                   onPressed: onIncrement,

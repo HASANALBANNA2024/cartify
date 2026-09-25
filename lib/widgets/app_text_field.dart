@@ -18,7 +18,7 @@ class AppTextField extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.black.withOpacity(0.08)),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.08)),
       ),
       child: TextField(
         onChanged: onChanged,
@@ -28,7 +28,10 @@ class AppTextField extends StatelessWidget {
           hintStyle: TextStyle(fontSize: 14, color: Colors.grey.shade500),
           prefixIcon: Icon(prefixIcon, color: Colors.grey.shade600, size: 20),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 12,
+            horizontal: 16,
+          ),
         ),
       ),
     );

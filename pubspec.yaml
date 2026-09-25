@@ -34,6 +34,7 @@ flutter:
 
   assets:
     - assets/product/
+    - assets/app_icon/
 
 
 

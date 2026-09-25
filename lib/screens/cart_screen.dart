@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../providers/cart_provider.dart';
-import '../widgets/cart_item_tile.dart';
 import '../widgets/app_button.dart';
+import '../widgets/cart_item_tile.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -12,7 +13,10 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFEEF2EC),
       appBar: AppBar(
-        title: const Text('Your Cart', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+        title: const Text(
+          'My Cart',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -34,10 +38,20 @@ class CartScreen extends StatelessWidget {
                         color: Color(0xFFF3E4C6),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.shopping_basket_outlined, size: 40, color: Color(0xFFC7861A)),
+                      child: const Icon(
+                        Icons.shopping_basket_outlined,
+                        size: 40,
+                        color: Color(0xFFC7861A),
+                      ),
                     ),
                     const SizedBox(height: 16),
-                    const Text('Your cart is empty', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    const Text(
+                      'Cart is empty',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 8),
                     const Text(
                       'Items you add will show up here, with live totals and quantity controls.',
@@ -56,36 +70,44 @@ class CartScreen extends StatelessWidget {
           }
 
           // Filled Cart View
-          return Padding(
+          return SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: cart.items.length,
-                    itemBuilder: (context, index) {
-                      final item = cart.items.values.toList()[index];
-                      return CartItemTile(
-                        cartItem: item,
-                        onIncrement: () => cart.incrementQuantity(item.product.id),
-                        onDecrement: () => cart.decrementQuantity(item.product.id),
-                        onRemove: () => cart.removeItem(item.product.id),
-                      );
-                    },
-                  ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: cart.items.length,
+                  itemBuilder: (context, index) {
+                    final item = cart.items.values.toList()[index];
+                    return CartItemTile(
+                      cartItem: item,
+                      onIncrement: () =>
+                          cart.incrementQuantity(item.product.id),
+                      onDecrement: () =>
+                          cart.decrementQuantity(item.product.id),
+                      onRemove: () => cart.removeItem(item.product.id),
+                    );
+                  },
                 ),
+                const SizedBox(height: 12),
                 // Summary Card
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.black.withOpacity(0.08)),
+                    border: Border.all(
+                      color: Colors.black.withValues(alpha: 0.08),
+                    ),
                   ),
                   child: Column(
                     children: [
                       _summaryRow('Total items', '${cart.totalItemCount}'),
-                      _summaryRow('Subtotal', '৳${cart.subtotal.toStringAsFixed(0)}'),
+                      _summaryRow(
+                        'Subtotal',
+                        '৳${cart.subtotal.toStringAsFixed(0)}',
+                      ),
                       _summaryRow(
                         'Discount ${cart.isEligibleForDiscount ? "(10%)" : "(needs >৳2000)"}',
                         '${cart.isEligibleForDiscount ? "-" : ""}৳${cart.discountAmount.toStringAsFixed(0)}',
@@ -123,14 +145,24 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  Widget _summaryRow(String label, String value, {Color? textColor, bool isTotal = false}) {
+  Widget _summaryRow(
+    String label,
+    String value, {
+    Color? textColor,
+    bool isTotal = false,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: textColor ?? Colors.grey.shade700,
-              fontWeight: isTotal ? FontWeight.bold : FontWeight.normal)),
+          Text(
+            label,
+            style: TextStyle(
+              color: textColor ?? Colors.grey.shade700,
+              fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
           Text(
             value,
             style: TextStyle(
