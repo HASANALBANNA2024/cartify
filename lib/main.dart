@@ -1,7 +1,8 @@
+import 'package:cartify/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'providers/app_providers.dart';
-import 'screens/product_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: const Color(0xFFEEF2EC),
           colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF132420)),
         ),
-        home: const ProductListScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
