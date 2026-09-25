@@ -3,6 +3,7 @@
 ![Flutter](https://img.shields.io/badge/FLUTTER-blue?style=flat-square&logo=flutter)
 ![Dart](https://img.shields.io/badge/DART-blue?style=flat-square&logo=dart)
 ![Provider](https://img.shields.io/badge/PROVIDER-6.1.5-blue?style=flat-square)
+![Flutter Analyze](https://img.shields.io/badge/FLUTTER%20ANALYZE-0%20ISSUES-brightgreen?style=flat-square)
 
 A clean and responsive Flutter application demonstrating state management using the **Provider** package without any external database or backend services.
 
